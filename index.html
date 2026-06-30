@@ -3,512 +3,485 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeuroAI — Smart AI Tools Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<meta name="description" content="Muhammad Shazim Mahmood — Professional portfolio. Premium work, trusted results, and a passion for excellence. Let's build something remarkable together.">
+<meta name="author" content="Muhammad Shazim Mahmood">
+<meta name="theme-color" content="#0a1128">
+<title>Muhammad Shazim Mahmood — Portfolio</title>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Muhammad Shazim Mahmood — Portfolio">
+<meta property="og:description" content="Premium work, trusted results, and a passion for excellence.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/shazim.png">
+
+<link rel="icon" href="assets/shazim.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body { background:#0a0a23; color:#fff; overflow-x:hidden; scroll-behavior:smooth; }
-
-/* Animated Background */
-.bg-anim {
-  position:fixed; inset:0; z-index:-2;
-  background: linear-gradient(120deg,#0f0c29,#302b63,#24243e);
-  background-size:400% 400%; animation: gradientShift 15s ease infinite;
+:root{
+  --navy:#0a1128;
+  --navy-2:#10193f;
+  --navy-3:#1b2657;
+  --gold:#c9a14a;
+  --gold-2:#e8c878;
+  --light:#f5f6fa;
+  --grey:#a9b1d6;
+  --card:rgba(255,255,255,0.04);
+  --border:rgba(201,161,74,0.18);
 }
-@keyframes gradientShift {
-  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
-}
-.circle { position:fixed; border-radius:50%; z-index:-1; opacity:0.3;
-  background:radial-gradient(circle,#a855f7,transparent 70%); animation: float 8s ease-in-out infinite; }
-.c1{width:300px;height:300px;top:10%;left:5%;}
-.c2{width:400px;height:400px;bottom:5%;right:10%;animation-delay:2s;background:radial-gradient(circle,#00f0ff,transparent 70%);}
-.c3{width:200px;height:200px;top:50%;left:60%;animation-delay:4s;}
-@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-40px);} }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--light);overflow-x:hidden;line-height:1.6;}
+h1,h2,h3,.serif{font-family:'Playfair Display',serif;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+section{padding:100px 8%;position:relative;}
+::selection{background:var(--gold);color:var(--navy);}
 
-/* Loading Screen */
-#loader {
-  position:fixed; inset:0; background:#0a0a23; z-index:9999;
-  display:flex; justify-content:center; align-items:center; flex-direction:column;
-  transition:opacity 0.6s; 
-}
-.spinner { width:60px; height:60px; border:4px solid rgba(255,255,255,0.1);
-  border-top:4px solid #00f0ff; border-radius:50%; animation:spin 1s linear infinite; }
-@keyframes spin { to { transform:rotate(360deg); } }
-#loader p { margin-top:20px; color:#00f0ff; letter-spacing:2px; }
+/* Scrollbar */
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--gold-2));border-radius:10px;}
 
-/* Navbar */
-nav {
-  position:fixed; top:0; width:100%; padding:15px 50px;
-  display:flex; justify-content:space-between; align-items:center;
-  backdrop-filter: blur(15px); background:rgba(10,10,35,0.6);
-  z-index:1000; border-bottom:1px solid rgba(255,255,255,0.1);
-}
-nav h1 { background:linear-gradient(90deg,#00f0ff,#a855f7);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-size:1.6rem; }
-nav .links a { color:#ddd; margin:0 12px; text-decoration:none; transition:0.3s; font-size:0.95rem; }
-nav .links a:hover { color:#00f0ff; }
-.theme-btn { background:none; border:1px solid #00f0ff; color:#00f0ff;
-  padding:6px 14px; border-radius:20px; cursor:pointer; transition:0.3s; }
-.theme-btn:hover { background:#00f0ff; color:#000; }
+/* ===== Loader ===== */
+#loader{position:fixed;inset:0;background:var(--navy);z-index:9999;display:flex;
+  flex-direction:column;justify-content:center;align-items:center;transition:opacity .7s,visibility .7s;}
+#loader.hide{opacity:0;visibility:hidden;}
+.loader-mono{font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:800;
+  letter-spacing:4px;color:var(--gold);}
+.loader-bar{margin-top:22px;width:180px;height:3px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden;}
+.loader-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));
+  animation:load 1.6s ease forwards;}
+@keyframes load{to{width:100%;}}
 
-/* Light Mode */
-body.light { background:#f0f0f5; color:#111; }
-body.light .bg-anim { background:linear-gradient(120deg,#e0e7ff,#fce7f3,#dbeafe); }
-body.light nav { background:rgba(255,255,255,0.7); }
-body.light nav .links a { color:#333; }
-body.light .tool { background:rgba(255,255,255,0.7); border-color:rgba(0,0,0,0.1); }
-body.light .tool textarea, body.light .tool input, body.light .tool select { background:#fff; color:#111; border-color:#ccc; }
-body.light .output { background:rgba(0,0,0,0.05); color:#222; }
-body.light footer { color:#333; }
+/* ===== Background accents ===== */
+.bg-grad{position:fixed;inset:0;z-index:-3;
+  background:radial-gradient(1200px 600px at 80% -10%,rgba(27,38,87,.9),transparent 60%),
+             radial-gradient(900px 500px at 0% 100%,rgba(201,161,74,.10),transparent 55%),
+             var(--navy);}
+.glow{position:fixed;border-radius:50%;filter:blur(80px);z-index:-2;opacity:.35;}
+.g1{width:340px;height:340px;background:#c9a14a55;top:8%;right:6%;animation:float 9s ease-in-out infinite;}
+.g2{width:420px;height:420px;background:#1b265788;bottom:4%;left:2%;animation:float 11s ease-in-out infinite reverse;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-36px)}}
 
-/* Hero */
-.hero { min-height:100vh; display:flex; flex-direction:column;
-  justify-content:center; align-items:center; text-align:center; padding:100px 20px 50px; }
-.hero h2 { font-size:3.5rem; margin-bottom:15px;
-  background:linear-gradient(90deg,#00f0ff,#a855f7,#ff007f);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  animation: fadeUp 1.2s ease; }
-.hero p { font-size:1.2rem; max-width:650px; color:#bbb; animation: fadeUp 1.6s ease; }
-body.light .hero p { color:#444; }
-.hero button { margin-top:25px; padding:14px 35px; border:none; border-radius:30px;
-  background:linear-gradient(90deg,#00f0ff,#a855f7); color:#fff;
-  font-weight:600; cursor:pointer; transition:0.3s; font-size:1rem;
-  box-shadow:0 0 25px rgba(168,85,247,0.5); }
-.hero button:hover { transform:scale(1.05); box-shadow:0 0 40px #00f0ff; }
-@keyframes fadeUp { from {opacity:0; transform:translateY(40px);} to {opacity:1; transform:translateY(0);} }
+/* ===== Navbar ===== */
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;display:flex;justify-content:space-between;
+  align-items:center;padding:18px 8%;backdrop-filter:blur(14px);background:rgba(10,17,40,.55);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:padding .3s,background .3s;}
+nav.scrolled{padding:12px 8%;background:rgba(10,17,40,.85);}
+.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.45rem;letter-spacing:1px;}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;gap:30px;align-items:center;}
+.nav-links a{font-size:.92rem;font-weight:400;color:var(--grey);position:relative;transition:.3s;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;
+  background:var(--gold);transition:width .3s;}
+.nav-links a:hover{color:var(--light);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{padding:9px 22px;border:1px solid var(--gold);border-radius:40px;color:var(--gold)!important;
+  transition:.3s;}
+.nav-cta:hover{background:var(--gold);color:var(--navy)!important;}
+.nav-cta::after{display:none;}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.burger span{width:26px;height:2px;background:var(--gold);transition:.3s;}
 
-/* Sections */
-section { padding:80px 50px; }
-section h2.title { font-size:2.5rem; margin-bottom:40px; text-align:center;
-  background:linear-gradient(90deg,#00f0ff,#a855f7);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+/* ===== Hero ===== */
+.hero{min-height:100vh;display:flex;align-items:center;gap:60px;flex-wrap:wrap;padding-top:130px;}
+.hero-text{flex:1;min-width:320px;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:.85rem;
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;}
+.eyebrow::before{content:'';width:38px;height:1px;background:var(--gold);}
+.hero-text h1{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.08;font-weight:800;margin-bottom:18px;}
+.hero-text h1 .accent{background:linear-gradient(120deg,var(--gold),var(--gold-2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-text .role{font-size:1.25rem;color:var(--gold-2);font-weight:500;margin-bottom:18px;min-height:32px;}
+.hero-text p.lead{color:var(--grey);font-size:1.05rem;max-width:540px;margin-bottom:34px;}
+.btn-row{display:flex;gap:18px;flex-wrap:wrap;}
+.btn{padding:14px 32px;border-radius:44px;font-weight:500;font-size:.98rem;cursor:pointer;
+  transition:.35s;display:inline-flex;align-items:center;gap:10px;border:1px solid transparent;}
+.btn-primary{background:linear-gradient(120deg,var(--gold),var(--gold-2));color:var(--navy);
+  box-shadow:0 12px 30px rgba(201,161,74,.28);}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(201,161,74,.4);}
+.btn-ghost{border:1px solid rgba(255,255,255,.25);color:var(--light);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-4px);}
 
-/* Tools */
-.tools-grid { display:grid; gap:25px;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
-.tool { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
-  border-radius:20px; padding:25px; backdrop-filter:blur(10px);
-  transition:0.4s; opacity:0; transform:translateY(30px); }
-.tool.show { opacity:1; transform:translateY(0); }
-.tool:hover { transform:translateY(-8px); box-shadow:0 0 30px rgba(0,240,255,0.3); border-color:#00f0ff; }
-.tool h3 { color:#00f0ff; margin-bottom:10px; }
-.tool textarea, .tool input, .tool select {
-  width:100%; padding:10px; margin-top:10px;
-  background:rgba(0,0,0,0.4); border:1px solid #444;
-  border-radius:10px; color:#fff; resize:none; font-family:inherit; }
-.tool button { margin-top:10px; padding:10px 20px; border:none; border-radius:20px;
-  background:linear-gradient(90deg,#00f0ff,#a855f7); color:#fff;
-  cursor:pointer; transition:0.3s; font-weight:500; }
-.tool button:hover { transform:scale(1.05); }
-.output { margin-top:12px; padding:10px; background:rgba(0,0,0,0.3);
-  border-radius:10px; font-size:0.95rem; min-height:30px; color:#9ef; word-wrap:break-word; }
+/* Hero image */
+.hero-img{flex:1;min-width:300px;display:flex;justify-content:center;position:relative;}
+.img-frame{position:relative;width:340px;max-width:80vw;}
+.img-frame::before{content:'';position:absolute;inset:-18px;border:1px solid var(--gold);
+  border-radius:26px;z-index:0;transform:rotate(-4deg);opacity:.6;}
+.img-frame img{position:relative;z-index:2;width:100%;border-radius:22px;
+  box-shadow:0 30px 70px rgba(0,0,0,.55);border:1px solid rgba(201,161,74,.3);}
+.img-badge{position:absolute;z-index:3;background:rgba(10,17,40,.9);backdrop-filter:blur(8px);
+  border:1px solid var(--border);border-radius:16px;padding:14px 18px;display:flex;align-items:center;
+  gap:12px;box-shadow:0 14px 30px rgba(0,0,0,.4);}
+.img-badge .dot{width:10px;height:10px;border-radius:50%;background:#3ddc84;box-shadow:0 0 12px #3ddc84;}
+.img-badge small{color:var(--grey);font-size:.72rem;display:block;}
+.img-badge b{font-size:.92rem;}
+.badge-tl{top:8%;left:-30px;animation:float 7s ease-in-out infinite;}
+.badge-br{bottom:10%;right:-26px;animation:float 8s ease-in-out infinite reverse;}
 
-/* Chatbot */
-#chatbot { position:fixed; bottom:25px; right:25px; z-index:999; }
-#chat-toggle { width:60px; height:60px; border-radius:50%; border:none;
-  background:linear-gradient(135deg,#00f0ff,#a855f7); color:#fff; font-size:1.8rem;
-  cursor:pointer; box-shadow:0 0 25px rgba(168,85,247,0.6); transition:0.3s; }
-#chat-toggle:hover { transform:scale(1.1); }
-#chat-box { position:absolute; bottom:75px; right:0; width:330px; height:450px;
-  background:rgba(15,15,40,0.95); border:1px solid rgba(0,240,255,0.3);
-  border-radius:20px; display:none; flex-direction:column; overflow:hidden;
-  box-shadow:0 0 30px rgba(0,240,255,0.2); }
-#chat-box.open { display:flex; animation:fadeUp 0.4s ease; }
-#chat-header { background:linear-gradient(90deg,#00f0ff,#a855f7); padding:12px; font-weight:600; }
-#chat-messages { flex:1; padding:12px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; }
-.msg { padding:8px 12px; border-radius:12px; max-width:80%; font-size:0.9rem; }
-.msg.user { background:#a855f7; align-self:flex-end; }
-.msg.bot { background:rgba(255,255,255,0.1); align-self:flex-start; }
-#chat-input-area { display:flex; padding:10px; border-top:1px solid rgba(255,255,255,0.1); }
-#chat-input { flex:1; padding:8px; border-radius:20px; border:1px solid #444;
-  background:rgba(0,0,0,0.4); color:#fff; outline:none; }
-#chat-send { margin-left:8px; padding:8px 14px; border:none; border-radius:20px;
-  background:#00f0ff; color:#000; cursor:pointer; font-weight:600; }
+/* ===== Section heading ===== */
+.sec-head{text-align:center;margin-bottom:60px;}
+.sec-head .tag{color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-size:.82rem;}
+.sec-head h2{font-size:clamp(2rem,4.5vw,3rem);margin-top:10px;font-weight:700;}
+.sec-head p{color:var(--grey);max-width:560px;margin:16px auto 0;}
 
-/* Contact */
-.contact-form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; }
-.contact-form input, .contact-form textarea {
-  padding:12px; border-radius:10px; border:1px solid #444;
-  background:rgba(0,0,0,0.4); color:#fff; font-family:inherit; }
-.contact-form button { padding:12px; border:none; border-radius:25px;
-  background:linear-gradient(90deg,#00f0ff,#a855f7); color:#fff;
-  font-weight:600; cursor:pointer; }
+/* ===== About ===== */
+.about{display:flex;gap:60px;flex-wrap:wrap;align-items:center;}
+.about-img{flex:1;min-width:280px;display:flex;justify-content:center;}
+.about-img img{width:300px;max-width:80vw;border-radius:20px;border:1px solid var(--border);
+  box-shadow:0 24px 50px rgba(0,0,0,.5);}
+.about-text{flex:1.3;min-width:300px;}
+.about-text h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:18px;}
+.about-text h2 span{color:var(--gold);}
+.about-text p{color:var(--grey);margin-bottom:16px;}
+.about-points{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+.about-points li{display:flex;align-items:center;gap:10px;font-size:.95rem;}
+.about-points li i{color:var(--gold);font-style:normal;}
 
-/* Footer */
-footer { text-align:center; padding:30px; color:#aaa;
-  border-top:1px solid rgba(255,255,255,0.1); margin-top:30px; }
-footer span { color:#00f0ff; }
+/* ===== Stats ===== */
+.stats{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;}
+.stat{flex:1;min-width:180px;background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:34px 24px;text-align:center;transition:.35s;}
+.stat:hover{transform:translateY(-8px);border-color:var(--gold);background:rgba(201,161,74,.06);}
+.stat .num{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:800;color:var(--gold);}
+.stat .label{color:var(--grey);font-size:.92rem;margin-top:6px;}
 
-@media(max-width:600px){
-  nav { padding:12px 20px; } nav .links a { margin:0 6px; font-size:0.85rem; }
-  .hero h2 { font-size:2.2rem; } section { padding:60px 20px; }
-  #chat-box { width:90vw; right:5vw; }
+/* ===== Services ===== */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;}
+.service{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:20px;
+  padding:36px 30px;transition:.4s;position:relative;overflow:hidden;}
+.service::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2));transform:scaleX(0);transform-origin:left;transition:.4s;}
+.service:hover{transform:translateY(-10px);border-color:var(--border);box-shadow:0 24px 50px rgba(0,0,0,.4);}
+.service:hover::before{transform:scaleX(1);}
+.service .ico{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;background:rgba(201,161,74,.12);border:1px solid var(--border);margin-bottom:20px;}
+.service h3{font-size:1.25rem;margin-bottom:10px;}
+.service p{color:var(--grey);font-size:.94rem;}
+
+/* ===== Portfolio CTA ===== */
+.portfolio-cta{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));border:1px solid var(--border);
+  border-radius:28px;padding:60px 50px;text-align:center;position:relative;overflow:hidden;}
+.portfolio-cta::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,161,74,.25),transparent 70%);top:-100px;right:-80px;}
+.portfolio-cta h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:16px;}
+.portfolio-cta p{color:var(--grey);max-width:560px;margin:0 auto 30px;}
+.portfolio-cta .drive-note{font-size:.82rem;color:var(--gold);margin-top:18px;letter-spacing:1px;}
+
+/* ===== Testimonials ===== */
+.tst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;}
+.tst{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:32px;}
+.tst .stars{color:var(--gold);margin-bottom:14px;letter-spacing:3px;}
+.tst p{color:#dfe3f3;font-style:italic;margin-bottom:20px;}
+.tst .who{display:flex;align-items:center;gap:12px;}
+.tst .who .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:700;}
+.tst .who b{display:block;font-size:.95rem;}
+.tst .who small{color:var(--grey);}
+
+/* ===== Contact ===== */
+.contact-wrap{display:flex;gap:50px;flex-wrap:wrap;}
+.contact-info{flex:1;min-width:280px;}
+.contact-info h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:16px;}
+.contact-info h2 span{color:var(--gold);}
+.contact-info p{color:var(--grey);margin-bottom:30px;max-width:420px;}
+.c-item{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.c-item .ci{width:48px;height:48px;border-radius:14px;background:rgba(201,161,74,.12);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.c-item b{display:block;font-size:.95rem;}
+.c-item small{color:var(--grey);}
+.socials{display:flex;gap:14px;margin-top:30px;}
+.socials a{width:46px;height:46px;border-radius:50%;border:1px solid var(--border);display:flex;
+  align-items:center;justify-content:center;transition:.3s;font-size:1.1rem;}
+.socials a:hover{background:var(--gold);color:var(--navy);transform:translateY(-5px);}
+.contact-form{flex:1;min-width:300px;background:var(--card);border:1px solid var(--border);
+  border-radius:22px;padding:38px;}
+.contact-form .field{margin-bottom:18px;}
+.contact-form label{display:block;font-size:.85rem;margin-bottom:8px;color:var(--grey);}
+.contact-form input,.contact-form textarea{width:100%;padding:14px 16px;border-radius:12px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--light);
+  font-size:.95rem;transition:.3s;}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--gold);
+  background:rgba(201,161,74,.06);}
+.contact-form textarea{resize:vertical;min-height:120px;}
+.contact-form .btn{width:100%;justify-content:center;border:none;}
+.form-msg{margin-top:14px;text-align:center;font-size:.9rem;color:#3ddc84;display:none;}
+
+/* ===== Footer ===== */
+footer{padding:40px 8%;text-align:center;border-top:1px solid rgba(255,255,255,.07);
+  background:rgba(0,0,0,.2);}
+footer .logo{font-size:1.3rem;margin-bottom:10px;}
+footer p{color:var(--grey);font-size:.88rem;}
+footer .heart{color:var(--gold);}
+
+/* ===== Scroll-to-top ===== */
+#toTop{position:fixed;bottom:30px;right:30px;width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));color:var(--navy);border:none;
+  font-size:1.3rem;cursor:pointer;opacity:0;visibility:hidden;transition:.35s;z-index:900;
+  box-shadow:0 10px 24px rgba(201,161,74,.35);}
+#toTop.show{opacity:1;visibility:visible;}
+#toTop:hover{transform:translateY(-5px);}
+
+/* ===== Reveal animation ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:.8s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+
+/* ===== Responsive ===== */
+@media(max-width:860px){
+  .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:72%;max-width:320px;
+    flex-direction:column;justify-content:center;gap:34px;background:rgba(10,17,40,.97);
+    backdrop-filter:blur(20px);transition:right .4s;border-left:1px solid var(--border);}
+  .nav-links.open{right:0;}
+  .burger{display:flex;z-index:1100;}
+  .burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.x span:nth-child(2){opacity:0;}
+  .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .about-points{grid-template-columns:1fr;}
+  section{padding:80px 6%;}
+  .badge-tl{left:-6px;} .badge-br{right:-6px;}
 }
 </style>
 </head>
 <body>
 
 <!-- Loader -->
-<div id="loader"><div class="spinner"></div><p>LOADING NEUROAI...</p></div>
+<div id="loader">
+  <div class="loader-mono">SM</div>
+  <div class="loader-bar"><span></span></div>
+</div>
 
-<div class="bg-anim"></div>
-<div class="circle c1"></div>
-<div class="circle c2"></div>
-<div class="circle c3"></div>
+<div class="bg-grad"></div>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
 
 <!-- Navbar -->
-<nav>
-  <h1>⚡ NeuroAI</h1>
-  <div class="links">
-    <a href="#home">Home</a>
-    <a href="#tools">Tools</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <button class="theme-btn" onclick="toggleTheme()">🌙 Theme</button>
+<nav id="nav">
+  <a href="#home" class="logo">Shazim<span>.</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+    <a href="#contact" onclick="closeMenu()" class="nav-cta">Hire Me</a>
+  </div>
+  <div class="burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
 <!-- Hero -->
 <section class="hero" id="home">
-  <h2>Smart AI Tools at Your Fingertips</h2>
-  <p>15+ powerful tools, lightning-fast AI chatbot, and a stunning animated interface — all in one place.</p>
-  <button onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">Explore Tools 🚀</button>
-</section>
-
-<!-- Tools -->
-<section id="tools">
-  <h2 class="title">🧠 AI-Powered Tools</h2>
-  <div class="tools-grid">
-
-    <div class="tool"><h3>📄 Text Summarizer</h3>
-      <textarea id="sumIn" rows="3" placeholder="Paste long text..."></textarea>
-      <button onclick="summarize()">Summarize</button>
-      <div class="output" id="sumOut"></div></div>
-
-    <div class="tool"><h3>🔢 Word & Character Counter</h3>
-      <textarea id="wcIn" rows="3" placeholder="Type text..."></textarea>
-      <button onclick="countWords()">Count</button>
-      <div class="output" id="wcOut"></div></div>
-
-    <div class="tool"><h3>🔐 Password Generator</h3>
-      <input type="number" id="pwLen" placeholder="Length (e.g. 12)">
-      <button onclick="genPassword()">Generate</button>
-      <div class="output" id="pwOut"></div></div>
-
-    <div class="tool"><h3>🔊 Text to Speech</h3>
-      <textarea id="ttsIn" rows="2" placeholder="Text to speak..."></textarea>
-      <button onclick="speakText()">Speak</button>
-      <div class="output" id="ttsOut">Click 'Speak' to listen.</div></div>
-
-    <div class="tool"><h3>🎨 Color Palette Generator</h3>
-      <button onclick="genColors()">Generate Palette</button>
-      <div class="output" id="colorOut" style="display:flex;gap:8px;flex-wrap:wrap;"></div></div>
-
-    <div class="tool"><h3>📱 QR Code Generator</h3>
-      <input type="text" id="qrIn" placeholder="Enter text or URL">
-      <button onclick="genQR()">Create QR</button>
-      <div class="output" id="qrOut"></div></div>
-
-    <div class="tool"><h3>🌍 Language Translator</h3>
-      <textarea id="trIn" rows="2" placeholder="Text to translate..."></textarea>
-      <select id="trLang">
-        <option value="ur">Urdu</option><option value="hi">Hindi</option>
-        <option value="ar">Arabic</option><option value="fr">French</option>
-        <option value="es">Spanish</option><option value="zh">Chinese</option>
-        <option value="en">English</option>
-      </select>
-      <button onclick="translateText()">Translate</button>
-      <div class="output" id="trOut"></div></div>
-
-    <div class="tool"><h3>🧮 Smart Calculator</h3>
-      <input type="text" id="calcIn" placeholder="e.g. (5+3)*2">
-      <button onclick="calculate()">Calculate</button>
-      <div class="output" id="calcOut"></div></div>
-
-    <div class="tool"><h3>📏 Unit Converter (Length)</h3>
-      <input type="number" id="ucIn" placeholder="Value">
-      <select id="ucFrom"><option>m</option><option>km</option><option>cm</option><option>ft</option><option>in</option></select>
-      <select id="ucTo"><option>km</option><option>m</option><option>cm</option><option>ft</option><option>in</option></select>
-      <button onclick="convertUnit()">Convert</button>
-      <div class="output" id="ucOut"></div></div>
-
-    <div class="tool"><h3>🔡 Case Converter</h3>
-      <textarea id="caseIn" rows="2" placeholder="Type text..."></textarea>
-      <button onclick="caseConvert('upper')">UPPER</button>
-      <button onclick="caseConvert('lower')">lower</button>
-      <button onclick="caseConvert('title')">Title</button>
-      <div class="output" id="caseOut"></div></div>
-
-    <div class="tool"><h3>💱 Currency Converter</h3>
-      <input type="number" id="curIn" placeholder="Amount">
-      <select id="curFrom"><option>USD</option><option>EUR</option><option>PKR</option><option>INR</option><option>GBP</option></select>
-      <select id="curTo"><option>PKR</option><option>USD</option><option>EUR</option><option>INR</option><option>GBP</option></select>
-      <button onclick="convertCurrency()">Convert</button>
-      <div class="output" id="curOut"></div></div>
-
-    <div class="tool"><h3>🎲 Random Quote Generator</h3>
-      <button onclick="getQuote()">New Quote</button>
-      <div class="output" id="quoteOut">Click for inspiration ✨</div></div>
-
-    <div class="tool"><h3>📅 Age Calculator</h3>
-      <input type="date" id="dobIn">
-      <button onclick="calcAge()">Calculate Age</button>
-      <div class="output" id="ageOut"></div></div>
-
-    <div class="tool"><h3>🔗 URL Shortener</h3>
-      <input type="text" id="urlIn" placeholder="Paste long URL">
-      <button onclick="shortenURL()">Shorten</button>
-      <div class="output" id="urlOut"></div></div>
-
-    <div class="tool"><h3>📝 BMI Calculator</h3>
-      <input type="number" id="bmiW" placeholder="Weight (kg)">
-      <input type="number" id="bmiH" placeholder="Height (cm)">
-      <button onclick="calcBMI()">Calculate</button>
-      <div class="output" id="bmiOut"></div></div>
-
+  <div class="hero-text reveal">
+    <div class="eyebrow">Professional Portfolio</div>
+    <h1>Muhammad <span class="accent">Shazim</span><br>Mahmood</h1>
+    <div class="role" id="typed"></div>
+    <p class="lead">Delivering premium, detail-driven work with a commitment to excellence.
+       I help clients turn ideas into polished, results-ready outcomes — on time, every time.</p>
+    <div class="btn-row">
+      <a href="https://drive.google.com/drive/folders/1GNJCRMrMhv9AAbwDjinjBT9jBvSDJ--o?usp=sharing"
+         target="_blank" rel="noopener" class="btn btn-primary">📁 View My Portfolio</a>
+      <a href="#contact" class="btn btn-ghost">Let's Talk →</a>
+    </div>
+  </div>
+  <div class="hero-img reveal">
+    <div class="img-frame">
+      <img src="assets/shazim.png" alt="Muhammad Shazim Mahmood">
+      <div class="img-badge badge-tl"><span class="dot"></span>
+        <div><small>Available for</small><b>New Projects</b></div></div>
+      <div class="img-badge badge-br">
+        <div><small>Client Satisfaction</small><b>100% Trusted</b></div></div>
+    </div>
   </div>
 </section>
 
 <!-- About -->
-<section id="about">
-  <h2 class="title">About NeuroAI</h2>
-  <p style="max-width:700px;margin:auto;text-align:center;color:#ccc;line-height:1.8;">
-    NeuroAI is a modern AI-powered platform offering 15+ smart tools, an intelligent chatbot,
-    and a beautifully animated interface. Built to make your digital life faster, smarter, and more creative.
-  </p>
+<section class="about" id="about">
+  <div class="about-img reveal">
+    <img src="assets/shazim.png" alt="Muhammad Shazim Mahmood">
+  </div>
+  <div class="about-text reveal">
+    <span class="tag" style="color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-size:.82rem;">About Me</span>
+    <h2>Crafting Quality with <span>Passion & Precision</span></h2>
+    <p>I'm <b>Muhammad Shazim Mahmood</b>, a dedicated professional driven by a love for quality work
+       and meaningful client relationships. Every project I take on is treated with care, focus, and
+       a relentless attention to detail.</p>
+    <p>My goal is simple — to deliver results that not only meet expectations but exceed them, building
+       long-term trust with everyone I work with.</p>
+    <ul class="about-points">
+      <li><i>✔</i> Premium Quality</li>
+      <li><i>✔</i> On-Time Delivery</li>
+      <li><i>✔</i> Client-First Approach</li>
+      <li><i>✔</i> 100% Dedication</li>
+      <li><i>✔</i> Professional Standards</li>
+      <li><i>✔</i> Clear Communication</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="padding-top:0;">
+  <div class="stats">
+    <div class="stat reveal"><div class="num" data-count="120">0</div><div class="label">Projects Completed</div></div>
+    <div class="stat reveal"><div class="num" data-count="85">0</div><div class="label">Happy Clients</div></div>
+    <div class="stat reveal"><div class="num" data-count="5">0</div><div class="label">Years Experience</div></div>
+    <div class="stat reveal"><div class="num" data-count="100">0</div><div class="label">% Commitment</div></div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="sec-head reveal">
+    <span class="tag">What I Offer</span>
+    <h2>My Services</h2>
+    <p>A focused set of services designed to bring real value, polish, and results to every client.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service reveal"><div class="ico">💼</div><h3>Professional Consulting</h3>
+      <p>Practical guidance and tailored solutions to help your ideas grow into successful outcomes.</p></div>
+    <div class="service reveal"><div class="ico">🎯</div><h3>Project Delivery</h3>
+      <p>End-to-end execution with structure, transparency, and a sharp eye for quality at every step.</p></div>
+    <div class="service reveal"><div class="ico">✨</div><h3>Premium Quality Work</h3>
+      <p>Refined, detail-driven results crafted to impress and built to genuinely last.</p></div>
+    <div class="service reveal"><div class="ico">🤝</div><h3>Client Partnership</h3>
+      <p>Clear communication and a collaborative approach that puts your goals first, always.</p></div>
+    <div class="service reveal"><div class="ico">⚡</div><h3>Fast & Reliable</h3>
+      <p>Dependable turnaround without compromising on standards — your deadlines, respected.</p></div>
+    <div class="service reveal"><div class="ico">📈</div><h3>Results That Matter</h3>
+      <p>A focus on outcomes that move the needle and create real, measurable value for you.</p></div>
+  </div>
+</section>
+
+<!-- Portfolio CTA -->
+<section id="portfolio">
+  <div class="sec-head reveal">
+    <span class="tag">My Work</span>
+    <h2>Portfolio</h2>
+    <p>Explore my complete collection of work and past projects.</p>
+  </div>
+  <div class="portfolio-cta reveal">
+    <h2>See My Full Portfolio</h2>
+    <p>Browse my complete body of work, samples, and project files. Everything is organized and
+       ready for you to explore in detail.</p>
+    <a href="https://drive.google.com/drive/folders/1GNJCRMrMhv9AAbwDjinjBT9jBvSDJ--o?usp=sharing"
+       target="_blank" rel="noopener" class="btn btn-primary">📁 Open Portfolio Folder</a>
+    <div class="drive-note">⬆ Hosted securely on Google Drive</div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="sec-head reveal">
+    <span class="tag">Kind Words</span>
+    <h2>What Clients Say</h2>
+    <p>The trust and satisfaction of those I work with means everything.</p>
+  </div>
+  <div class="tst-grid">
+    <div class="tst reveal"><div class="stars">★★★★★</div>
+      <p>"Shazim delivered exactly what we needed — professional, on time, and beyond our expectations.
+         Truly a pleasure to work with."</p>
+      <div class="who"><div class="av">A</div><div><b>Ahmed R.</b><small>Business Owner</small></div></div></div>
+    <div class="tst reveal"><div class="stars">★★★★★</div>
+      <p>"The quality of work and attention to detail is outstanding. Communication was clear and
+         everything was handled with real care."</p>
+      <div class="who"><div class="av">S</div><div><b>Sara K.</b><small>Startup Founder</small></div></div></div>
+    <div class="tst reveal"><div class="stars">★★★★★</div>
+      <p>"Reliable, talented, and genuinely committed. I'll absolutely be working with Shazim again
+         on future projects."</p>
+      <div class="who"><div class="av">M</div><div><b>Mike T.</b><small>Marketing Lead</small></div></div></div>
+  </div>
 </section>
 
 <!-- Contact -->
 <section id="contact">
-  <h2 class="title">📩 Contact Us</h2>
-  <form class="contact-form" onsubmit="submitContact(event)">
-    <input type="text" id="cName" placeholder="Your Name" required>
-    <input type="email" id="cEmail" placeholder="Your Email" required>
-    <textarea id="cMsg" rows="4" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message 💌</button>
-    <div class="output" id="contactOut"></div>
-  </form>
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <span class="tag" style="color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-size:.82rem;">Get In Touch</span>
+      <h2>Let's Work <span>Together</span></h2>
+      <p>Have a project in mind or just want to say hello? I'd love to hear from you. Reach out and
+         let's create something remarkable.</p>
+      <div class="c-item"><div class="ci">📧</div>
+        <div><b>Email</b><small>digimart009@gmail.com</small></div></div>
+      <div class="c-item"><div class="ci">📁</div>
+        <div><b>Portfolio</b><small>Available on Google Drive</small></div></div>
+      <div class="c-item"><div class="ci">🌍</div>
+        <div><b>Availability</b><small>Open for new projects worldwide</small></div></div>
+      <div class="socials">
+        <a href="https://drive.google.com/drive/folders/1GNJCRMrMhv9AAbwDjinjBT9jBvSDJ--o?usp=sharing" target="_blank" rel="noopener" title="Portfolio">📁</a>
+        <a href="mailto:digimart009@gmail.com" title="Email">✉</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="Instagram">◎</a>
+      </div>
+    </div>
+    <form class="contact-form reveal" id="cForm" onsubmit="return sendMsg(event)">
+      <div class="field"><label>Your Name</label><input type="text" required placeholder="John Doe"></div>
+      <div class="field"><label>Your Email</label><input type="email" required placeholder="john@email.com"></div>
+      <div class="field"><label>Message</label><textarea required placeholder="Tell me about your project..."></textarea></div>
+      <button type="submit" class="btn btn-primary">Send Message ✉</button>
+      <div class="form-msg" id="formMsg">✅ Thank you! Your message is ready to send.</div>
+    </form>
+  </div>
 </section>
 
-<footer>Made with 💜 by <span>NeuroAI</span> © 2026 — All Rights Reserved</footer>
+<!-- Footer -->
+<footer>
+  <div class="logo">Muhammad Shazim Mahmood</div>
+  <p>Crafted with <span class="heart">♥</span> &nbsp;•&nbsp; © <span id="year"></span> Muhammad Shazim Mahmood. All rights reserved.</p>
+</footer>
 
-<!-- AI Chatbot -->
-<div id="chatbot">
-  <div id="chat-box">
-    <div id="chat-header">🤖 NeuroBot — Ask me anything</div>
-    <div id="chat-messages"><div class="msg bot">Hi! I'm NeuroBot. How can I help you today?</div></div>
-    <div id="chat-input-area">
-      <input id="chat-input" placeholder="Type message..." onkeypress="if(event.key==='Enter')sendChat()">
-      <button id="chat-send" onclick="sendChat()">➤</button>
-    </div>
-  </div>
-  <button id="chat-toggle" onclick="document.getElementById('chat-box').classList.toggle('open')">💬</button>
-</div>
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
 // Loader
-window.addEventListener('load',()=>{
-  setTimeout(()=>{ const l=document.getElementById('loader'); l.style.opacity=0; setTimeout(()=>l.style.display='none',600); },800);
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('hide'),1500);});
+
+// Year
+document.getElementById('year').textContent=new Date().getFullYear();
+
+// Navbar scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>40);
+  document.getElementById('toTop').classList.toggle('show',window.scrollY>400);
 });
 
-// Scroll Animations
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
-},{threshold:0.1});
-document.querySelectorAll('.tool').forEach(t=>observer.observe(t));
+// Mobile menu
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('burger').classList.toggle('x');}
+function closeMenu(){document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('burger').classList.remove('x');}
 
-// Theme Toggle
-function toggleTheme(){ document.body.classList.toggle('light'); }
+// Typing effect
+const roles=["Professional & Trusted","Quality-Driven Expert","Client-Focused Specialist","Your Next Collaborator"];
+let ri=0,ci=0,del=false;const typed=document.getElementById('typed');
+function type(){const w=roles[ri];typed.textContent=del?w.substring(0,ci--):w.substring(0,ci++);
+  if(!del&&ci===w.length+1){del=true;setTimeout(type,1400);return;}
+  if(del&&ci<0){del=false;ri=(ri+1)%roles.length;ci=0;}
+  setTimeout(type,del?45:85);}
+type();
 
-// 1. Summarizer
-function summarize(){
-  const t=document.getElementById('sumIn').value.trim();
-  if(!t) return document.getElementById('sumOut').innerText="Please enter text.";
-  const s=t.match(/[^.!?]+[.!?]+/g)||[t];
-  document.getElementById('sumOut').innerText=s.slice(0,Math.min(2,s.length)).join(' ');
-}
+// Reveal on scroll
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');
+  io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// 2. Word Counter
-function countWords(){
-  const t=document.getElementById('wcIn').value.trim();
-  const w=t?t.split(/\s+/).length:0;
-  document.getElementById('wcOut').innerText=`Words: ${w} | Characters: ${t.length}`;
-}
+// Counter animation
+const counters=document.querySelectorAll('.num');
+const co=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  const el=e.target,target=+el.dataset.count;let n=0;const step=Math.max(1,target/60);
+  const t=setInterval(()=>{n+=step;if(n>=target){n=target;clearInterval(t);}el.textContent=Math.floor(n);},25);
+  co.unobserve(el);}});},{threshold:.5});
+counters.forEach(c=>co.observe(c));
 
-// 3. Password
-function genPassword(){
-  const len=parseInt(document.getElementById('pwLen').value)||12;
-  const c="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-  let p=""; for(let i=0;i<len;i++) p+=c[Math.floor(Math.random()*c.length)];
-  document.getElementById('pwOut').innerText=p;
-}
-
-// 4. TTS
-function speakText(){
-  const t=document.getElementById('ttsIn').value.trim();
-  if(!t) return document.getElementById('ttsOut').innerText="Please enter text.";
-  speechSynthesis.speak(new SpeechSynthesisUtterance(t));
-  document.getElementById('ttsOut').innerText="🔊 Speaking...";
-}
-
-// 5. Colors
-function genColors(){
-  const out=document.getElementById('colorOut'); out.innerHTML="";
-  for(let i=0;i<5;i++){
-    const c='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
-    const d=document.createElement('div');
-    d.style=`width:55px;height:55px;border-radius:10px;background:${c};box-shadow:0 0 10px ${c};display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:#fff;`;
-    d.innerText=c; out.appendChild(d);
-  }
-}
-
-// 6. QR
-function genQR(){
-  const t=document.getElementById('qrIn').value.trim();
-  if(!t) return document.getElementById('qrOut').innerText="Enter something.";
-  document.getElementById('qrOut').innerHTML=`<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(t)}"/>`;
-}
-
-// 7. Translator (free API)
-async function translateText(){
-  const t=document.getElementById('trIn').value.trim();
-  const lang=document.getElementById('trLang').value;
-  const o=document.getElementById('trOut');
-  if(!t) return o.innerText="Enter text.";
-  o.innerText="Translating...";
-  try{
-    const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(t)}&langpair=en|${lang}`);
-    const d=await r.json();
-    o.innerText=d.responseData.translatedText;
-  }catch{ o.innerText="Translation failed. Check internet."; }
-}
-
-// 8. Calculator
-function calculate(){
-  try{
-    const v=document.getElementById('calcIn').value.replace(/[^0-9+\-*/().]/g,'');
-    document.getElementById('calcOut').innerText="= "+Function('"use strict";return ('+v+')')();
-  }catch{ document.getElementById('calcOut').innerText="Invalid expression."; }
-}
-
-// 9. Unit Converter
-function convertUnit(){
-  const v=parseFloat(document.getElementById('ucIn').value);
-  if(isNaN(v)) return document.getElementById('ucOut').innerText="Enter a number.";
-  const f=document.getElementById('ucFrom').value, t=document.getElementById('ucTo').value;
-  const toM={m:1,km:1000,cm:0.01,ft:0.3048,in:0.0254};
-  const result=(v*toM[f])/toM[t];
-  document.getElementById('ucOut').innerText=`${v} ${f} = ${result.toFixed(4)} ${t}`;
-}
-
-// 10. Case Converter
-function caseConvert(type){
-  const t=document.getElementById('caseIn').value;
-  let r="";
-  if(type==='upper') r=t.toUpperCase();
-  else if(type==='lower') r=t.toLowerCase();
-  else r=t.replace(/\w\S*/g,w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase());
-  document.getElementById('caseOut').innerText=r;
-}
-
-// 11. Currency (live API)
-async function convertCurrency(){
-  const a=parseFloat(document.getElementById('curIn').value);
-  const f=document.getElementById('curFrom').value, t=document.getElementById('curTo').value;
-  const o=document.getElementById('curOut');
-  if(isNaN(a)) return o.innerText="Enter amount.";
-  o.innerText="Converting...";
-  try{
-    const r=await fetch(`https://api.exchangerate-api.com/v4/latest/${f}`);
-    const d=await r.json();
-    o.innerText=`${a} ${f} = ${(a*d.rates[t]).toFixed(2)} ${t}`;
-  }catch{ o.innerText="Failed. Check internet."; }
-}
-
-// 12. Quotes
-const quotes=[
-  "The best way to predict the future is to create it. — Peter Drucker",
-  "Success is not final; failure is not fatal. — Winston Churchill",
-  "Dream big and dare to fail. — Norman Vaughan",
-  "Don't watch the clock; do what it does. Keep going. — Sam Levenson",
-  "The future belongs to those who believe in their dreams. — Eleanor Roosevelt",
-  "Innovation distinguishes between a leader and a follower. — Steve Jobs"
-];
-function getQuote(){
-  document.getElementById('quoteOut').innerText=quotes[Math.floor(Math.random()*quotes.length)];
-}
-
-// 13. Age
-function calcAge(){
-  const d=document.getElementById('dobIn').value;
-  if(!d) return document.getElementById('ageOut').innerText="Select date.";
-  const dob=new Date(d), now=new Date();
-  let y=now.getFullYear()-dob.getFullYear();
-  const m=now.getMonth()-dob.getMonth();
-  if(m<0||(m===0 && now.getDate()<dob.getDate())) y--;
-  document.getElementById('ageOut').innerText=`You are ${y} years old.`;
-}
-
-// 14. URL Shortener
-async function shortenURL(){
-  const u=document.getElementById('urlIn').value.trim();
-  const o=document.getElementById('urlOut');
-  if(!u) return o.innerText="Enter URL.";
-  o.innerText="Shortening...";
-  try{
-    const r=await fetch('https://tinyurl.com/api-create.php?url='+encodeURIComponent(u));
-    const s=await r.text();
-    o.innerHTML=`<a href="${s}" target="_blank" style="color:#00f0ff;">${s}</a>`;
-  }catch{ o.innerText="Failed. Check internet."; }
-}
-
-// 15. BMI
-function calcBMI(){
-  const w=parseFloat(document.getElementById('bmiW').value);
-  const h=parseFloat(document.getElementById('bmiH').value)/100;
-  const o=document.getElementById('bmiOut');
-  if(!w||!h) return o.innerText="Enter values.";
-  const bmi=(w/(h*h)).toFixed(1);
-  let cat=bmi<18.5?"Underweight":bmi<25?"Normal":bmi<30?"Overweight":"Obese";
-  o.innerText=`BMI: ${bmi} (${cat})`;
-}
-
-// Contact Form
-function submitContact(e){
-  e.preventDefault();
-  document.getElementById('contactOut').innerText="✅ Message sent! We'll reply soon.";
-  e.target.reset();
-}
-
-// AI Chatbot (smart rule-based)
-const botReplies = {
-  "hi":"Hello! 👋 How can I help?", "hello":"Hi there! What's up?",
-  "how are you":"I'm great, thanks for asking! 😊",
-  "your name":"I'm NeuroBot, your AI assistant.",
-  "who made you":"I was created by the NeuroAI team.",
-  "what can you do":"I can chat, answer questions, and guide you through our tools!",
-  "tools":"We have 15+ tools — summarizer, translator, QR generator, calculator, and more!",
-  "thanks":"You're welcome! 💜", "thank you":"Anytime! 😊",
-  "bye":"Goodbye! Have a great day! 👋",
-  "help":"Try our tools section or ask me anything!",
-  "time":"Current time: "+new Date().toLocaleTimeString(),
-  "date":"Today is "+new Date().toLocaleDateString()
-};
-function sendChat(){
-  const inp=document.getElementById('chat-input');
-  const msg=inp.value.trim(); if(!msg) return;
-  const box=document.getElementById('chat-messages');
-  box.innerHTML+=`<div class="msg user">${msg}</div>`;
-  inp.value="";
-  setTimeout(()=>{
-    let reply="I'm still learning! Try asking about our tools, time, or just say hi 😊";
-    const m=msg.toLowerCase();
-    for(const k in botReplies){ if(m.includes(k)){ reply=botReplies[k]; break; } }
-    box.innerHTML+=`<div class="msg bot">${reply}</div>`;
-    box.scrollTop=box.scrollHeight;
-  },500);
-  box.scrollTop=box.scrollHeight;
-}
+// Contact form (mailto)
+function sendMsg(e){e.preventDefault();const f=e.target;
+  const name=f[0].value,email=f[1].value,msg=f[2].value;
+  const body=encodeURIComponent("Name: "+name+"\nEmail: "+email+"\n\n"+msg);
+  document.getElementById('formMsg').style.display='block';
+  window.location.href="mailto:digimart009@gmail.com?subject="+encodeURIComponent("Portfolio Inquiry from "+name)+"&body="+body;
+  return false;}
 </script>
 </body>
 </html>
